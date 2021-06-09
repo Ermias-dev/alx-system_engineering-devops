@@ -1,0 +1,1 @@
+This shows how we can see a current directory
