@@ -1,1 +1,1 @@
-This shous the unix commands
+This shows the unix commands
