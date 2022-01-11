@@ -5,7 +5,7 @@
 # configure a response header
 
 sudo apt update &&
-    sudo apt -y install nginx
+sudo apt -y install nginx
 sudo ufw allow 'Nginx HTTP'
 echo 'Hello World!' > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
