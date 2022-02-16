@@ -1,19 +1,22 @@
 #!/usr/bin/python3
-''' task 1 module'''
+"""
+Contains the top_ten function
+"""
 
 import requests
-import sys
 
 
 def top_ten(subreddit):
-    '''gets 10 hottest posts of a subreddit'''
-    headers = {'User-agent': 'test23'}
-    url = 'https://www.reddit.com/r/'
-    posts = requests.get(url + '{}/hot.json?limit=10'.format(
-        sys.argv[1]), allow_redirects=False, headers=headers)
-    
-    if posts.status_code == 200:
-        for post in posts.json()['data']['children']:
-            print(post['data']['title'])
-    else:
+    """prints the titles of the top ten hot posts for a given subreddit"""
+    if subreddit is None or type(subreddit) is not str:
         print(None)
+    r = requests.get('http://www.reddit.com/r/{}/hot.json'.format(subreddit),
+                     headers={'User-Agent': 'Python/requests:APIproject:\
+                     v1.0.0 (by /u/aaorrico23)'},
+                     params={'limit': 10}).json()
+    posts = r.get('data', {}).get('children', None)
+    if posts is None or (len(posts) > 0 and posts[0].get('kind') != 't3'):
+        print(None)
+    else:
+        for post in posts:
+            print(post.get('data', {}).get('title', None))
